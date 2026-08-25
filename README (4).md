@@ -150,26 +150,5 @@ cv2.destroyAllWindows()
 ser.close()
 ```
 
-## Cómo ejecutar el proyecto
+Video del funcionamiento https://youtube.com/shorts/TDQ3pTk7aI4?si=YV7Ywn8aTSq806EI
 
-1. Instalar dependencias en el entorno virtual del PC:
-   ```
-   pip install opencv-python ultralytics pyserial
-   ```
-2. Cargar `main.py` en el ESP32 (con Thonny o la extensión MicroPython de VS Code).
-3. **Cerrar Thonny** (o cualquier programa que tenga el puerto COM abierto) para liberar el puerto.
-4. Verificar el número de puerto COM del ESP32 en el Administrador de dispositivos de Windows.
-5. Ajustar el puerto en el script de Python (`ser = serial.Serial('COMx', ...)`).
-6. Ejecutar el script de Python desde VS Code. Se abrirá la cámara y, al detectar el carro o la moto de juguete, el LED correspondiente se encenderá en el ESP32.
-
-## Problemas comunes y solución
-
-| Error | Causa | Solución |
-|---|---|---|
-| `could not open port 'COMx'` | El puerto ya está siendo usado por otro programa (ej. Thonny) | Cerrar el otro programa/monitor serial antes de correr el script |
-| `ModuleNotFoundError: No module named 'cv2'` | Falta instalar OpenCV en el venv | `pip install opencv-python` |
-| `ModuleNotFoundError: No module named 'machine'` | El código se está corriendo en Python del PC en vez de en el ESP32 | Seleccionar el intérprete "MicroPython (ESP32)" en Thonny, o subir el archivo al dispositivo |
-
-## Extensión: control por voz
-
-Como variante adicional, se implementó un control por voz que envía los mismos comandos (`C`, `M`, `N`) al ESP32 usando reconocimiento de voz en el PC, reemplazando la detección de YOLO como fuente de la señal — el código del ESP32 no requiere ningún cambio, ya que interpreta el mismo protocolo serial.
